@@ -47,6 +47,14 @@ public class Client {
         }
     }
 
+    public ClientProtocol getClientProtocol() {
+        return clientProtocol;
+    }
+
+    public void setClientProtocol(ClientProtocol clientProtocol) {
+        this.clientProtocol = clientProtocol;
+    }
+
     public void listenMessage() {
         new Thread(new MessageListener(in, clientProtocol)).start();
     }
@@ -55,6 +63,7 @@ public class Client {
         Client client = new Client(args[0], Integer.parseInt(args[1]));
         client.listenMessage();
         client.register(args[2]);
+        client.getClientProtocol().setUsername(args[2]);
         client.userInput();
     }
 }

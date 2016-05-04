@@ -10,15 +10,14 @@ import java.util.Map;
  */
 public class DataHandler {
     private static DataHandler ourInstance;
-    private static Map<String, Connection> connections;
+    private static Map<String, User> connections;
     private static Map<String, List<String>> groups;
-    private static Map<String, String> files;
 
     public static DataHandler getInstance() {
         if (ourInstance==null) {
             ourInstance = new DataHandler();
             connections = new HashMap<>();
-            files = new HashMap<>();
+            groups = new HashMap<>();
         }
         return ourInstance;
     }
@@ -26,28 +25,28 @@ public class DataHandler {
     private DataHandler() {
     }
 
-    public void storeFile(String name, String content) {
-        files.put(name, content);
+    public void storeFile(String user, String name, String content) {
+        connections.get(user).getFiles().put(name, content);
     }
 
-    public String getFile(String name){
-        return files.get(name);
+    public String getFile(String username, String name){
+        return connections.get(username).getFiles().get(name);
     }
 
     public void registerClient(String username, Connection connection) throws IOException {
-        connections.put(username, connection);
+        connections.put(username, new User(connection));
     }
 
-    public Connection getUser(String username) {
-        return connections.get(username);
-    }
-
-    public List<Connection> getGroup(String groupname) {
-        List<Connection> sockets = new LinkedList<>();
-        for (String user: groups.get(groupname)) {
-            sockets.add(connections.get(user));
-        }
-        return sockets;
+    public List<Connection> getUsers(String name, String without) {
+        List<Connection> cons = new LinkedList<>();
+        if (groups.get(name)!=null)
+            for (String user: groups.get(name)) {
+                if (!user.equals(without))
+                    cons.add(connections.get(user).getConnection());
+            }
+        if (connections.get(name)!=null && !connections.get(name).equals(without))
+            cons.add(connections.get(name).getConnection());
+        return cons;
     }
 
     public void createGroup(String name, List<String> usernames) {
