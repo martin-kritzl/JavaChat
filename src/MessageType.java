@@ -9,4 +9,5 @@ public enum MessageType {
     REGISTER_USER,
     REGISTER_GROUP,
     FALSEUSER,
+    STATISTIC
 }

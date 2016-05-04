@@ -34,7 +34,11 @@ public class DataHandler {
     }
 
     public void registerClient(String username, Connection connection) throws IOException {
-        connections.put(username, new User(connection));
+        connections.put(username, new User(username, connection));
+    }
+
+    public User getUser(String name) {
+        return connections.get(name);
     }
 
     public List<Connection> getUsers(String name, String without) {

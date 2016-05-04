@@ -12,7 +12,7 @@ public class ClientProtocol {
     public void handleMessage(Message message) throws IOException {
         if (message.getType()==MessageType.OK) {
             System.out.println("Registration ok");
-        } else if(message.getType()==MessageType.TEXT || message.getType()==MessageType.FALSEUSER) {
+        } else if(message.getType()==MessageType.TEXT || message.getType()==MessageType.FALSEUSER || message.getType()==MessageType.STATISTIC) {
             System.out.println(message.getSource() + ": " + message.getContent());
         } else if (message.getType()==MessageType.FILEDOWNLOAD) {
             System.out.println("Saved file");
@@ -40,6 +40,10 @@ public class ClientProtocol {
                     users+=" " + args[i];
                 }
                 message = new Message(MessageType.REGISTER_GROUP, users, username, args[1]);
+            } else if (command.equals("statistic")) {
+                message = new Message(MessageType.STATISTIC, null, username, null);
+            } else if (command.equals("quit") || command.equals("exit")) {
+                System.exit(0);
             }
         } else {
             message = new Message(MessageType.TEXT, input, username, chatroom);
