@@ -12,22 +12,22 @@ import java.net.Socket;
 public class ServerHandler implements Runnable {
 
     private Socket socket;
+    private ServerProtocol protocol;
 
     public ServerHandler(Socket socket) throws IOException {
         this.socket = socket;
+        this.protocol = new ServerProtocol();
     }
 
     @Override
     public void run() {
             try {
-                System.out.println("Listen Message");
                 ObjectInput input = new ObjectInputStream(socket.getInputStream());
                 ObjectOutput output = new ObjectOutputStream(socket.getOutputStream());
 
                 while(true) {
                     Message message = (Message) input.readObject();
-                    System.out.println("Server: " + message.getContent());
-                    ServerProtocol.handleMessage(message, new Connection(socket, input, output));
+                    protocol.handleMessage(message, new Connection(socket, output));
                 }
 
             } catch (ClassNotFoundException | IOException e) {

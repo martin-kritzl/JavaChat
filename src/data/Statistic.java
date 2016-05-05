@@ -13,24 +13,12 @@ public class Statistic {
         this.name = name;
     }
 
-    public int getSentMessages() {
-        return sentMessages;
-    }
-
-    public int getBytes() {
-        return bytes;
-    }
-
     public void addBytes(int bytes) {
         this.bytes += bytes;
     }
 
     public void increaseSentMessages() {
         sentMessages++;
-    }
-
-    public int getFiles() {
-        return files;
     }
 
     public void increaseFiles() {
@@ -41,7 +29,7 @@ public class Statistic {
     public String toString() {
         String out = "Name: " + name + "\r\n";
         out += "Bytes sent: " + bytes + "\r\n";
-        out += "Files uploaded: " + files + "\r\n";
+        out += "Files downloaded: " + files + "\r\n";
         out += "Sent Messages: " + sentMessages + "\r\n";
         return out;
     }

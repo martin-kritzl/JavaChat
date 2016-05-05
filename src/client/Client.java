@@ -1,11 +1,10 @@
 package client;
 
+import creator.CreateUserMessageCreator;
 import data.Message;
-import data.MessageType;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.List;
 
 /**
  * Created by mkritzl on 03.05.2016.
@@ -31,15 +30,7 @@ public class Client {
     }
 
     public void register(String username) throws IOException, ClassNotFoundException {
-        this.out.writeObject(new Message(MessageType.REGISTER_USER, null, username, null));
-    }
-
-    public void writeMessage(String message, String destination) throws IOException {
-        this.out.writeObject(new Message(MessageType.TEXT, message, clientProtocol.getUsername(), destination));
-    }
-
-    public void createRoom(String name, List<String> usernames) throws IOException {
-        this.out.writeObject(new Message(MessageType.REGISTER_GROUP, usernames.toString(), clientProtocol.getUsername(), name));
+        this.out.writeObject(new CreateUserMessageCreator().create(username, null,null));
     }
 
     public void userInput() throws IOException {
@@ -54,10 +45,6 @@ public class Client {
 
     public ClientProtocol getClientProtocol() {
         return clientProtocol;
-    }
-
-    public void setClientProtocol(ClientProtocol clientProtocol) {
-        this.clientProtocol = clientProtocol;
     }
 
     public void listenMessage() {

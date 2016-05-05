@@ -1,21 +1,20 @@
 package handler;
 
 import connection.Connection;
-import creator.StatisticMessageCreator;
 import data.DataHandler;
 import data.Message;
+import org.omg.CORBA.CODESET_INCOMPATIBLE;
 
 import java.io.IOException;
 
 /**
  * Created by mkritzl on 05.05.2016.
  */
-public class StatisticMessageHandler implements MessageHandler {
-
+public class CreateUserMessageHandler implements MessageHandler{
     @Override
     public void handle(Message message, Connection connection) {
         try {
-            connection.getOut().writeObject(new StatisticMessageCreator().create(DataHandler.getInstance().getUser(message.getSource()).getStatistic().toString(), "[Server]", message.getSource()));
+            DataHandler.getInstance().registerClient(message.getSource(), connection);
         } catch (IOException e) {
             e.printStackTrace();
         }

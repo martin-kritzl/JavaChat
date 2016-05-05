@@ -1,6 +1,5 @@
 package client;
 
-import client.ClientProtocol;
 import data.Message;
 
 import java.io.IOException;

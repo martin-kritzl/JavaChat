@@ -22,31 +22,21 @@ public class Message implements Serializable{
         return type;
     }
 
-    public void setType(MessageType type) {
-        this.type = type;
-    }
-
     public String getContent() {
         return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     public String getDestination() {
         return destination;
     }
 
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
-
     public String getSource() {
         return source;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    @Override
+    public String toString() {
+        return "Type: " + type + "\r\nContent: " + content + "\r\nSource: "  + source + "\r\nDestination: "  + destination + "\r\n";
     }
+
 }

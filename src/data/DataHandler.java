@@ -28,12 +28,12 @@ public class DataHandler {
     private DataHandler() {
     }
 
-    public void storeFile(String user, String name, String content) {
-        connections.get(user).getFiles().put(name, content);
+    public String getClientStorage() {
+        return "resources/client/";
     }
 
-    public String getFile(String username, String name){
-        return connections.get(username).getFiles().get(name);
+    public String getServerStorage() {
+        return "resources/server/";
     }
 
     public void registerClient(String username, Connection connection) throws IOException {
