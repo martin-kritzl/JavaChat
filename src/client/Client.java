@@ -1,3 +1,8 @@
+package client;
+
+import data.Message;
+import data.MessageType;
+
 import java.io.*;
 import java.net.Socket;
 import java.util.List;

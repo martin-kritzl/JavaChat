@@ -1,5 +1,6 @@
+package data;
+
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by mkritzl on 03.05.2016.

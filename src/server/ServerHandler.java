@@ -1,3 +1,8 @@
+package server;
+
+import connection.Connection;
+import data.Message;
+
 import java.io.*;
 import java.net.Socket;
 

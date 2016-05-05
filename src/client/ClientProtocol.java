@@ -1,3 +1,8 @@
+package client;
+
+import data.Message;
+import data.MessageType;
+
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -10,11 +15,11 @@ public class ClientProtocol {
     private String username;
 
     public void handleMessage(Message message) throws IOException {
-        if (message.getType()==MessageType.OK) {
+        if (message.getType()== MessageType.OK) {
             System.out.println("Registration ok");
-        } else if(message.getType()==MessageType.TEXT || message.getType()==MessageType.FALSEUSER || message.getType()==MessageType.STATISTIC) {
+        } else if(message.getType()== MessageType.TEXT || message.getType()== MessageType.FALSEUSER || message.getType()== MessageType.STATISTIC) {
             System.out.println(message.getSource() + ": " + message.getContent());
-        } else if (message.getType()==MessageType.FILEDOWNLOAD) {
+        } else if (message.getType()== MessageType.FILEDOWNLOAD) {
             System.out.println("Saved file");
             FileOutputStream out = new FileOutputStream(new File(message.getDestination()));
             out.write(message.getContent().getBytes());

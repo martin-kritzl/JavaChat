@@ -1,3 +1,7 @@
+package data;
+
+import connection.Connection;
+
 import java.util.HashMap;
 import java.util.Map;
 

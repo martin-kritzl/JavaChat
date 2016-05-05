@@ -1,3 +1,8 @@
+package client;
+
+import client.ClientProtocol;
+import data.Message;
+
 import java.io.IOException;
 import java.io.ObjectInput;
 
